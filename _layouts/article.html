@@ -1,0 +1,99 @@
+---
+layout: default
+---
+{%- comment -%}
+  Layout for individual labs, projects and blog posts.
+  Every field except `title` and `date` is optional; anything missing is
+  simply not rendered.
+{%- endcomment -%}
+{%- assign section = site.data.sections[page.collection] -%}
+
+<div class="container article-layout">
+  <article class="article" aria-labelledby="article-title">
+    <header class="article-header">
+      {%- if section %}
+      <p class="eyebrow">
+        <a href="{{ section.url | relative_url }}">{{ section.name }}</a>
+      </p>
+      {%- endif %}
+
+      <h1 id="article-title" class="article-title">{{ page.title }}</h1>
+
+      {%- if page.description and page.description != '' %}
+      <p class="article-description">{{ page.description }}</p>
+      {%- endif %}
+
+      <dl class="article-meta">
+        <div>
+          <dt>Published</dt>
+          <dd>{% include date.html date=page.date %}</dd>
+        </div>
+        {%- if page.last_updated and page.last_updated != '' %}
+        <div>
+          <dt>Updated</dt>
+          <dd>{% include date.html date=page.last_updated %}</dd>
+        </div>
+        {%- endif %}
+        {%- if page.collection == 'posts' %}
+        <div>
+          <dt>Reading time</dt>
+          <dd>{% include reading-time.html content=content %}</dd>
+        </div>
+        {%- endif %}
+        {%- if page.difficulty and page.difficulty != '' %}
+        <div>
+          <dt>Difficulty</dt>
+          <dd>{{ page.difficulty }}</dd>
+        </div>
+        {%- endif %}
+        {%- if page.estimated_time and page.estimated_time != '' %}
+        <div>
+          <dt>Estimated time</dt>
+          <dd>{{ page.estimated_time }}</dd>
+        </div>
+        {%- endif %}
+        {%- if page.status and page.status != '' %}
+        <div>
+          <dt>Status</dt>
+          <dd>{% include status-badge.html status=page.status %}</dd>
+        </div>
+        {%- endif %}
+      </dl>
+
+      {% include tag-list.html tags=page.tags section=page.collection %}
+
+      {%- assign has_github = false -%}{%- if page.github_url and page.github_url != '' -%}{%- assign has_github = true -%}{%- endif -%}
+      {%- assign has_demo = false -%}{%- if page.demo_url and page.demo_url != '' -%}{%- assign has_demo = true -%}{%- endif -%}
+      {%- if has_github or has_demo %}
+      <p class="article-actions">
+        {%- if has_github %}
+        <a class="button button-secondary" href="{{ page.github_url }}">View source on GitHub</a>
+        {%- endif %}
+        {%- if has_demo %}
+        <a class="button button-secondary" href="{{ page.demo_url }}">View live demo</a>
+        {%- endif %}
+      </p>
+      {%- endif %}
+    </header>
+
+    {%- if page.sample %}
+    {% include sample-notice.html %}
+    {%- endif %}
+
+    {%- unless page.toc == false %}
+    {% include table-of-contents.html html=content %}
+    {%- endunless %}
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    {% include related.html %}
+
+    {%- if section %}
+    <p class="back-link">
+      <a href="{{ section.url | relative_url }}"><span aria-hidden="true">&larr; </span>Back to all {{ section.plural }}</a>
+    </p>
+    {%- endif %}
+  </article>
+</div>

@@ -1,0 +1,125 @@
+# =============================================================================
+# Site configuration
+#
+# This is the main settings file. Jekyll only reads it when the server starts,
+# so restart `bundle exec jekyll serve` after editing it locally.
+# =============================================================================
+
+# --- Identity ----------------------------------------------------------------
+title: "Arrashi Faris Saesarian Libinuko"
+# Shortened name shown in the navigation bar.
+brand: "Arrashi Libinuko"
+description: >-
+  Cybersecurity labs, technical projects and write-ups by Arrashi Faris
+  Saesarian Libinuko, focused on SOC analysis, incident response and network
+  security.
+lang: en
+
+author:
+  name: "Arrashi Faris Saesarian Libinuko"
+
+# --- Social links (PLACEHOLDERS) ---------------------------------------------
+# Leave a value empty ("") to hide that link. Nothing is linked until you fill
+# these in, so the site never shows a link that goes nowhere.
+social:
+  github_username: ""     # e.g. "your-github-username" -> https://github.com/your-github-username
+  linkedin_url: ""        # e.g. "https://www.linkedin.com/in/your-profile/"
+  # Optional: link to the repository that hosts this website's source.
+  source_repository_url: ""  # e.g. "https://github.com/your-github-username/cybersecurity-portfolio"
+
+# --- Hosting / URLs ----------------------------------------------------------
+# `url` is your GitHub Pages domain, WITHOUT a trailing slash. It is only used
+# for absolute links (social previews, RSS feed, sitemap).
+#   - Project site or user site:  "https://your-github-username.github.io"
+#   - Custom domain:              "https://www.example.com"
+url: ""
+
+# `baseurl` is the sub-path the site lives under, WITH a leading slash and
+# WITHOUT a trailing slash.
+#   - Repository named "cybersecurity-portfolio" -> "/cybersecurity-portfolio"
+#   - Repository named "<username>.github.io"     -> ""
+#   - Custom domain                               -> ""
+# If you rename the repository, update this value.
+baseurl: "/cybersecurity-portfolio"
+
+# --- Display options ---------------------------------------------------------
+# strftime format used for every date on the site (e.g. "27 Oct 2026").
+date_format: "%-d %b %Y"
+# Words per minute used for the blog "minute read" estimate.
+reading_speed_wpm: 200
+# Number of recent projects/labs shown on the home page.
+home_recent_count: 3
+# Max related items shown at the bottom of an article (0 disables).
+related_count: 3
+
+# Uncomment to render dates in your local time zone instead of UTC.
+# timezone: Etc/UTC
+
+# --- Content collections -----------------------------------------------------
+# Every Markdown file in _labs/ and _projects/ becomes its own page.
+# The URL is built from the file name: _labs/dns-analysis.md -> /labs/dns-analysis/
+# A `permalink:` in a file's front matter overrides this.
+collections:
+  labs:
+    output: true
+    permalink: /labs/:name/
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Blog posts live in _posts/ and are published under /blog/.
+# _posts/2026-10-27-learning-wireshark.md -> /blog/2026/10/learning-wireshark/
+permalink: /blog/:year/:month/:title/
+
+# Front matter defaults, so individual files don't have to repeat them.
+defaults:
+  - scope: { path: "", type: labs }
+    values: { layout: article }
+  - scope: { path: "", type: projects }
+    values: { layout: article }
+  - scope: { path: "", type: posts }
+    values: { layout: article }
+  - scope: { path: "" }
+    values: { layout: page }
+
+# --- Markdown & code highlighting --------------------------------------------
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  auto_ids: true
+  hard_wrap: false
+  # Generate heading IDs from text only (e.g. "Lab Setup" -> "lab-setup").
+  transliterated_header_ids: true
+
+# --- Plugins (all supported by GitHub Pages) ---------------------------------
+plugins:
+  - jekyll-seo-tag   # <title>, meta description, Open Graph / Twitter cards
+  - jekyll-feed      # /feed.xml for blog posts
+  - jekyll-sitemap   # /sitemap.xml
+
+feed:
+  path: feed.xml
+
+# --- Build settings ----------------------------------------------------------
+# Draft content (published: false) and future-dated content are never built on
+# GitHub Pages. Preview drafts locally with:
+#   bundle exec jekyll serve --unpublished --future
+future: false
+
+# Files that should not be copied into the generated site.
+# Note: in Jekyll 3 this list replaces the defaults, so keep Gemfile etc. here.
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
+  - .bundle/
+  - .jekyll-cache/
+  - .sass-cache/
+  - .github/
+  - .gitignore
+  - "*.code-workspace"

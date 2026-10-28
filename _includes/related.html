@@ -1,0 +1,37 @@
+{%- comment -%}
+  Related items from the same section that share at least one tag with the
+  current page, newest first. Renders nothing if there are no matches.
+  The maximum count is `related_count` in _config.yml (0 disables it).
+{%- endcomment -%}
+{%- assign max_related = site.related_count | default: 3 -%}
+{%- if max_related > 0 and page.tags and page.tags.size > 0 -%}
+  {%- if page.collection == 'posts' -%}
+    {%- assign pool = site.posts -%}
+  {%- else -%}
+    {%- assign pool = site[page.collection] | sort: 'date' | reverse -%}
+  {%- endif -%}
+  {%- unless site.future -%}{%- assign pool = pool | where_exp: 'item', 'item.date <= site.time' -%}{%- endunless -%}
+
+  {%- assign related = '' | split: '' -%}
+  {%- for candidate in pool -%}
+    {%- if related.size >= max_related -%}{%- break -%}{%- endif -%}
+    {%- if candidate.url == page.url or candidate.tags == nil -%}{%- continue -%}{%- endif -%}
+    {%- for tag in page.tags -%}
+      {%- if candidate.tags contains tag -%}
+        {%- assign related = related | push: candidate -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+
+  {%- if related.size > 0 %}
+<section class="related" aria-labelledby="related-heading">
+  <h2 id="related-heading" class="section-title">Related {{ site.data.sections[page.collection].plural }}</h2>
+  <div class="card-grid">
+    {%- for item in related %}
+    {% include card.html item=item %}
+    {%- endfor %}
+  </div>
+</section>
+  {%- endif -%}
+{%- endif -%}

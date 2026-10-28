@@ -1,0 +1,43 @@
+{%- comment -%}
+  Table of contents built at build time from the rendered article HTML.
+
+  kramdown gives every heading an id ("## Lab Setup" -> id="lab-setup"),
+  so this include just scans the HTML for <h2>/<h3> tags and links to those
+  ids. Because it reads the final content, it can never fall out of sync
+  with the article. No JavaScript is needed for it to work.
+
+  Usage: {% include table-of-contents.html html=content %}
+
+  To leave a heading out of the TOC, add {: .no_toc} on the line after it.
+{%- endcomment -%}
+{%- assign chunks = include.html | split: '<h' -%}
+{%- capture toc_items -%}
+  {%- for chunk in chunks -%}
+    {%- assign level = chunk | slice: 0, 1 -%}
+    {%- assign next_char = chunk | slice: 1, 1 -%}
+    {%- if level == '2' or level == '3' -%}
+      {%- if next_char == ' ' or next_char == '>' -%}
+        {%- assign heading = chunk | split: '</h' | first -%}
+        {%- assign attrs = heading | split: '>' | first -%}
+        {%- if attrs contains 'id="' -%}{%- unless attrs contains 'no_toc' -%}
+          {%- assign heading_id = attrs | split: 'id="' | last | split: '"' | first -%}
+          {%- assign heading_text = heading | remove_first: attrs | remove_first: '>' | strip_html | strip -%}
+          {%- if heading_id != '' and heading_text != '' -%}
+            <li class="toc-item toc-level-{{ level }}"><a href="#{{ heading_id }}">{{ heading_text }}</a></li>
+          {%- endif -%}
+        {%- endunless -%}{%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign toc_items = toc_items | strip -%}
+{%- if toc_items != '' -%}
+<nav class="toc" aria-labelledby="toc-heading" data-toc>
+  <details class="toc-details" open>
+    <summary id="toc-heading" class="toc-title">On this page</summary>
+    <ol class="toc-list">
+      {{ toc_items }}
+    </ol>
+  </details>
+</nav>
+{%- endif -%}

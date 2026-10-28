@@ -1,0 +1,38 @@
+{%- comment -%}
+  Global navigation. Menu items come from _data/navigation.yml.
+  A section is highlighted when the current URL starts with its URL, so
+  /labs/dns-analysis/ highlights "Labs". Home only matches "/" exactly.
+{%- endcomment -%}
+<header class="site-header">
+  <nav class="navbar container" aria-label="Main">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-prompt" aria-hidden="true">&gt;_</span>
+      <span class="brand-name">{{ site.brand | default: site.title }}</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <ul class="nav-menu" id="primary-menu">
+      {%- for item in site.data.navigation -%}
+        {%- assign url_length = item.url | size -%}
+        {%- assign url_prefix = page.url | slice: 0, url_length -%}
+        {%- if item.url == '/' -%}
+          {%- if page.url == '/' or page.url == '/index.html' -%}{%- assign in_section = true -%}{%- else -%}{%- assign in_section = false -%}{%- endif -%}
+        {%- elsif url_prefix == item.url -%}
+          {%- assign in_section = true -%}
+        {%- else -%}
+          {%- assign in_section = false -%}
+        {%- endif %}
+      <li>
+        <a class="nav-link{% if in_section %} is-active{% endif %}" href="{{ item.url | relative_url }}"
+          {%- if page.url == item.url %} aria-current="page"{% elsif in_section %} aria-current="true"{% endif %}>
+          {{- item.title -}}
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </nav>
+</header>

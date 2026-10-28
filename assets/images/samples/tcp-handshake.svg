@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380" role="img" aria-labelledby="t d">
+  <title id="t">TCP three-way handshake</title>
+  <desc id="d">The client sends SYN, the server replies SYN-ACK, and the client replies ACK.</desc>
+  <rect width="720" height="380" fill="#11171f"/>
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif" fill="#d6dde6">
+    <text x="140" y="44" font-size="20" font-weight="600" text-anchor="middle">Client</text>
+    <text x="580" y="44" font-size="20" font-weight="600" text-anchor="middle">Server</text>
+    <text x="140" y="66" font-size="14" fill="#94a1b2" text-anchor="middle">192.168.56.10</text>
+    <text x="580" y="66" font-size="14" fill="#94a1b2" text-anchor="middle">192.168.56.20:80</text>
+  </g>
+  <line x1="140" y1="80" x2="140" y2="350" stroke="#33404f" stroke-width="2"/>
+  <line x1="580" y1="80" x2="580" y2="350" stroke="#33404f" stroke-width="2"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4fd1a1"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7cc0ff"/></marker>
+  </defs>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">
+    <line x1="140" y1="120" x2="580" y2="170" stroke="#4fd1a1" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="360" y="128" fill="#4fd1a1" text-anchor="middle">1. SYN  seq=x</text>
+    <line x1="580" y1="200" x2="140" y2="250" stroke="#7cc0ff" stroke-width="2.5" marker-end="url(#b)"/>
+    <text x="360" y="208" fill="#7cc0ff" text-anchor="middle">2. SYN, ACK  seq=y ack=x+1</text>
+    <line x1="140" y1="280" x2="580" y2="330" stroke="#4fd1a1" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="360" y="288" fill="#4fd1a1" text-anchor="middle">3. ACK  seq=x+1 ack=y+1</text>
+  </g>
+</svg>

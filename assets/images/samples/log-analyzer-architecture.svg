@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="220" viewBox="0 0 860 220" role="img" aria-labelledby="t d">
+  <title id="t">Log analyzer architecture</title>
+  <desc id="d">Log file is read by the parser, events go to the detection rules, and results are written to a report.</desc>
+  <rect width="860" height="220" fill="#11171f"/>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#94a1b2"/></marker></defs>
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif" text-anchor="middle">
+    <g><rect x="20" y="70" width="160" height="80" rx="10" fill="#161e28" stroke="#33404f" stroke-width="2"/>
+      <text x="100" y="105" fill="#f1f5f9" font-size="17" font-weight="600">auth.log</text>
+      <text x="100" y="128" fill="#94a1b2" font-size="13">input file</text></g>
+    <g><rect x="240" y="70" width="160" height="80" rx="10" fill="#161e28" stroke="#4fd1a1" stroke-width="2"/>
+      <text x="320" y="105" fill="#f1f5f9" font-size="17" font-weight="600">Parser</text>
+      <text x="320" y="128" fill="#94a1b2" font-size="13">regex → events</text></g>
+    <g><rect x="460" y="70" width="160" height="80" rx="10" fill="#161e28" stroke="#4fd1a1" stroke-width="2"/>
+      <text x="540" y="105" fill="#f1f5f9" font-size="17" font-weight="600">Detections</text>
+      <text x="540" y="128" fill="#94a1b2" font-size="13">threshold rules</text></g>
+    <g><rect x="680" y="70" width="160" height="80" rx="10" fill="#161e28" stroke="#33404f" stroke-width="2"/>
+      <text x="760" y="105" fill="#f1f5f9" font-size="17" font-weight="600">Report</text>
+      <text x="760" y="128" fill="#94a1b2" font-size="13">table / JSON</text></g>
+  </g>
+  <g stroke="#94a1b2" stroke-width="2" marker-end="url(#a)">
+    <line x1="182" y1="110" x2="236" y2="110"/><line x1="402" y1="110" x2="456" y2="110"/><line x1="622" y1="110" x2="676" y2="110"/>
+  </g>
+</svg>

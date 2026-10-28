@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="t">
+  <title id="t">Placeholder screenshot</title>
+  <rect width="960" height="540" fill="#11171f"/>
+  <rect x="0" y="0" width="960" height="40" fill="#161e28"/>
+  <circle cx="24" cy="20" r="6" fill="#33404f"/><circle cx="44" cy="20" r="6" fill="#33404f"/><circle cx="64" cy="20" r="6" fill="#33404f"/>
+  <rect x="1" y="1" width="958" height="538" fill="none" stroke="#232d3a" stroke-width="2"/>
+  <text x="480" y="270" fill="#94a1b2" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" text-anchor="middle">Replace with your screenshot</text>
+  <text x="480" y="310" fill="#5b6878" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" text-anchor="middle">assets/images/labs/&lt;lab-slug&gt;/screenshot.png</text>
+</svg>

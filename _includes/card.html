@@ -1,0 +1,54 @@
+{%- comment -%}
+  One card for a lab, project or blog post. Used on the home page and on
+  every listing page, so all cards share the same markup.
+
+  Usage: {% include card.html item=lab %}
+  Optional: heading_level=2 (defaults to 3)
+
+  The data-* attributes are read by assets/js/main.js for search, tag
+  filtering and sorting. They are generated at build time, so new Markdown
+  files are picked up automatically.
+{%- endcomment -%}
+{%- assign item = include.item -%}
+{%- assign section = site.data.sections[item.collection] -%}
+{%- assign h = include.heading_level | default: 3 -%}
+
+{%- assign summary = item.description -%}
+{%- if summary == nil or summary == '' -%}
+  {%- assign summary = item.excerpt | strip_html | strip | truncatewords: 30 -%}
+{%- endif -%}
+
+{%- assign tags_joined = '' -%}
+{%- if item.tags -%}{%- assign tags_joined = item.tags | join: '|' -%}{%- endif -%}
+
+<article class="card"
+  data-card
+  data-date="{{ item.date | date: '%s' }}"
+  data-tags="{{ tags_joined | downcase | escape }}"
+  data-search="{{ item.title | append: ' ' | append: summary | append: ' ' | append: tags_joined | downcase | escape }}">
+  <div class="card-meta">
+    {% include date.html date=item.date %}
+    {%- if item.collection == 'posts' %}
+    <span aria-hidden="true">&middot;</span>
+    <span>{% include reading-time.html content=item.content %}</span>
+    {%- endif %}
+    {% include status-badge.html status=item.status %}
+    {%- if item.sample %}<span class="badge badge-sample">Sample</span>{% endif %}
+  </div>
+
+  <h{{ h }} class="card-title">
+    <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+  </h{{ h }}>
+
+  {%- if summary and summary != '' %}
+  <p class="card-description">{{ summary }}</p>
+  {%- endif %}
+
+  {% include tag-list.html tags=item.tags section=item.collection %}
+
+  <a class="card-link" href="{{ item.url | relative_url }}">
+    {{- section.read_more | default: 'Read more' -}}
+    <span class="visually-hidden">: {{ item.title }}</span>
+    <span aria-hidden="true"> &rarr;</span>
+  </a>
+</article>

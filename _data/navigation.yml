@@ -1,0 +1,12 @@
+# Main navigation. Order here = order in the menu.
+# `url` is root-relative; the site's baseurl is added automatically.
+- title: Home
+  url: /
+- title: Labs
+  url: /labs/
+- title: Projects
+  url: /projects/
+- title: Blog
+  url: /blog/
+- title: About
+  url: /about/

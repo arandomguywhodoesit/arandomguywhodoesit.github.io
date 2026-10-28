@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0f14">
+
+{%- comment -%}
+  jekyll-seo-tag outputs <title>, the meta description, canonical URL,
+  Open Graph / Twitter card tags and JSON-LD from each page's front matter
+  (title, description, date, image) and the site settings in _config.yml.
+{%- endcomment %}
+{% seo %}
+{% feed_meta %}
+
+<link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+{%- comment -%}
+  Marks the page as JS-capable before first paint, so controls that need
+  JavaScript (filters, mobile menu) only appear when they will work.
+{%- endcomment %}
+<script>document.documentElement.classList.add('js');</script>

@@ -1,0 +1,91 @@
+---
+layout: default
+---
+{%- comment -%}
+  Home page. The hero text comes from index.md (front matter + body), so you
+  can edit it without touching this layout. The "recent" sections are built
+  automatically from _projects/ and _labs/.
+{%- endcomment -%}
+{%- assign recent_count = site.home_recent_count | default: 3 -%}
+{%- assign recent_projects = site.projects | sort: 'date' | reverse -%}
+{%- assign recent_labs = site.labs | sort: 'date' | reverse -%}
+{%- comment -%}
+  Jekyll 3 skips writing future-dated lab/project pages but still lists them
+  in site.labs / site.projects, so drop them here to avoid dead links.
+{%- endcomment -%}
+{%- unless site.future -%}
+  {%- assign recent_projects = recent_projects | where_exp: 'item', 'item.date <= site.time' -%}
+  {%- assign recent_labs = recent_labs | where_exp: 'item', 'item.date <= site.time' -%}
+{%- endunless -%}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    {%- if page.hero_eyebrow %}
+    <p class="hero-eyebrow" aria-hidden="true">{{ page.hero_eyebrow }}</p>
+    {%- endif %}
+    <h1 id="hero-title" class="hero-title">{{ site.author.name | default: site.title }}</h1>
+    {%- if page.hero_tagline %}
+    <p class="hero-tagline">{{ page.hero_tagline }}</p>
+    {%- endif %}
+
+    <div class="hero-body prose">
+      {{ content }}
+    </div>
+
+    {%- if page.interests and page.interests.size > 0 %}
+    <div class="hero-interests">
+      <h2 class="hero-interests-title">Areas of interest</h2>
+      <ul class="interest-list">
+        {%- for interest in page.interests %}
+        <li>{{ interest }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- endif %}
+
+    {%- if page.hero_goal %}
+    <p class="hero-goal">{{ page.hero_goal }}</p>
+    {%- endif %}
+
+    <p class="hero-actions">
+      <a class="button button-primary" href="{{ '/projects/' | relative_url }}">View My Projects</a>
+      <a class="button button-secondary" href="{{ '/labs/' | relative_url }}">Explore My Labs</a>
+    </p>
+  </div>
+</section>
+
+<section class="home-section" aria-labelledby="recent-projects-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="recent-projects-title" class="section-title">Recent projects</h2>
+      <a class="section-link" href="{{ '/projects/' | relative_url }}">View all projects<span aria-hidden="true"> &rarr;</span></a>
+    </div>
+    {%- if recent_projects.size > 0 %}
+    <div class="card-grid">
+      {%- for project in recent_projects limit: recent_count %}
+      {% include card.html item=project %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-state">No projects have been published yet.</p>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="home-section" aria-labelledby="recent-labs-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="recent-labs-title" class="section-title">Recent labs</h2>
+      <a class="section-link" href="{{ '/labs/' | relative_url }}">View all labs<span aria-hidden="true"> &rarr;</span></a>
+    </div>
+    {%- if recent_labs.size > 0 %}
+    <div class="card-grid">
+      {%- for lab in recent_labs limit: recent_count %}
+      {% include card.html item=lab %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-state">No labs have been published yet.</p>
+    {%- endif %}
+  </div>
+</section>
