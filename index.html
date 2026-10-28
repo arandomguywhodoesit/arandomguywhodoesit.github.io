@@ -1,0 +1,50 @@
+---
+layout: default
+title: Home
+permalink: /
+---
+
+<section class="hero">
+  <p class="eyebrow">CYBERSECURITY • SOC • INCIDENT RESPONSE</p>
+  <h1>Arrashi Faris Saesarian Libinuko</h1>
+  <p class="hero-copy">A systems security graduate building practical skills in cybersecurity, SOC analysis, incident response, and network security—one investigation and lab at a time.</p>
+  <div class="hero-actions">
+    <a class="button button-primary" href="{{ '/labs/' | relative_url }}">Explore my labs</a>
+    <a class="button button-secondary" href="{{ '/projects/' | relative_url }}">View projects</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <div><p class="eyebrow">HANDS-ON LEARNING</p><h2>Recent projects</h2></div>
+    <a class="text-link" href="{{ '/projects/' | relative_url }}">All projects <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="card-grid">
+    {% assign published_projects = site.projects | where: "published", true | sort: "date" | reverse %}
+    {% for item in published_projects limit:3 %}
+      {% include content-card.html item=item %}
+    {% else %}
+      <p class="empty-state">Projects will appear here when published.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <div><p class="eyebrow">PRACTICE & INVESTIGATION</p><h2>Recent labs</h2></div>
+    <a class="text-link" href="{{ '/labs/' | relative_url }}">All labs <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="card-grid">
+    {% assign published_labs = site.labs | where: "published", true | sort: "date" | reverse %}
+    {% for item in published_labs limit:3 %}
+      {% include content-card.html item=item %}
+    {% else %}
+      <p class="empty-state">Labs will appear here when published.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="callout">
+  <div><p class="eyebrow">ALWAYS LEARNING</p><h2>Documenting the process, not just the result.</h2><p>This portfolio records what I test, what I observe, and what I learn along the way.</p></div>
+  <a class="button button-secondary" href="{{ '/about/' | relative_url }}">More about me</a>
+</section>

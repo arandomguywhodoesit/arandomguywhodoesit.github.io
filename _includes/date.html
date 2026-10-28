@@ -1,7 +1,0 @@
-{%- comment -%}
-  Renders a machine-readable <time> element using the site-wide date format.
-  Usage: {% include date.html date=page.date %}
-{%- endcomment -%}
-{%- if include.date -%}
-<time datetime="{{ include.date | date: '%Y-%m-%d' }}">{{ include.date | date: site.date_format | default: '%-d %b %Y' }}</time>
-{%- endif -%}

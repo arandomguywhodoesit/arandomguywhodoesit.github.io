@@ -1,22 +1,9 @@
-{%- assign social = site.social -%}
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <p class="footer-copy">
-      &copy; <span data-current-year>{{ site.time | date: '%Y' }}</span>
-      {{ site.author.name | default: site.title }}. All rights reserved.
-    </p>
-
-    <ul class="footer-links">
-      {%- if social.github_username and social.github_username != '' %}
-      <li><a href="https://github.com/{{ social.github_username }}" rel="me">GitHub</a></li>
-      {%- endif %}
-      {%- if social.linkedin_url and social.linkedin_url != '' %}
-      <li><a href="{{ social.linkedin_url }}" rel="me">LinkedIn</a></li>
-      {%- endif %}
-      {%- if social.source_repository_url and social.source_repository_url != '' %}
-      <li><a href="{{ social.source_repository_url }}">Site source</a></li>
-      {%- endif %}
-      <li><a href="{{ '/feed.xml' | relative_url }}">RSS feed</a></li>
-    </ul>
+  <div class="footer-inner">
+    <p>© {{ site.time | date: "%Y" }} {{ site.author | default: site.title }}. Built with Jekyll and GitHub Pages.</p>
+    <div class="footer-links">
+      {% if site.github_username and site.github_username != "YOUR_GITHUB_USERNAME" %}<a href="https://github.com/{{ site.github_username | escape }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>{% endif %}
+      {% if site.linkedin_url and site.linkedin_url != "https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE/" %}<a href="{{ site.linkedin_url | escape }}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>{% endif %}
+    </div>
   </div>
 </footer>

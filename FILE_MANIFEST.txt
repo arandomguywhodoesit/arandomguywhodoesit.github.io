@@ -1,0 +1,25 @@
+Generated cybersecurity portfolio implementation.
+
+.nojekyll
+BLOG_TEMPLATE.md
+FILE_MANIFEST.txt
+Gemfile
+LAB_TEMPLATE.md
+PROJECT_TEMPLATE.md
+README.md
+_config.yml
+index.html
+_posts/2026-10-16-understanding-dns-example.md
+assets/js/main.js
+assets/css/style.css
+labs/index.html
+_layouts/article.html
+_layouts/default.html
+blog/index.html
+about/index.html
+projects/index.html
+_includes/content-card.html
+_includes/footer.html
+_includes/navbar.html
+_projects/python-log-analyzer-example.md
+_labs/wireshark-tcp-handshake-example.md

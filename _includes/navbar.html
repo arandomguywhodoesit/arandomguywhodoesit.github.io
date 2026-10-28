@@ -1,38 +1,19 @@
-{%- comment -%}
-  Global navigation. Menu items come from _data/navigation.yml.
-  A section is highlighted when the current URL starts with its URL, so
-  /labs/dns-analysis/ highlights "Labs". Home only matches "/" exactly.
-{%- endcomment -%}
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
-  <nav class="navbar container" aria-label="Main">
-    <a class="brand" href="{{ '/' | relative_url }}">
-      <span class="brand-prompt" aria-hidden="true">&gt;_</span>
-      <span class="brand-name">{{ site.brand | default: site.title }}</span>
-    </a>
-
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="visually-hidden">Menu</span>
-    </button>
-
-    <ul class="nav-menu" id="primary-menu">
-      {%- for item in site.data.navigation -%}
-        {%- assign url_length = item.url | size -%}
-        {%- assign url_prefix = page.url | slice: 0, url_length -%}
-        {%- if item.url == '/' -%}
-          {%- if page.url == '/' or page.url == '/index.html' -%}{%- assign in_section = true -%}{%- else -%}{%- assign in_section = false -%}{%- endif -%}
-        {%- elsif url_prefix == item.url -%}
-          {%- assign in_section = true -%}
-        {%- else -%}
-          {%- assign in_section = false -%}
-        {%- endif %}
-      <li>
-        <a class="nav-link{% if in_section %} is-active{% endif %}" href="{{ item.url | relative_url }}"
-          {%- if page.url == item.url %} aria-current="page"{% elsif in_section %} aria-current="true"{% endif %}>
-          {{- item.title -}}
-        </a>
-      </li>
-      {%- endfor %}
-    </ul>
-  </nav>
+  <div class="nav-wrap">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Portfolio home"><span class="brand-mark">AF</span><span>AF<span class="brand-dot">.</span></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation"><span class="sr-only">Toggle navigation</span><span></span><span></span><span></span></button>
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Main navigation">
+      {% assign nav_items = "Home|/;Labs|/labs/;Projects|/projects/;Blog|/blog/;About|/about/" | split: ";" %}
+      {% for entry in nav_items %}
+        {% assign parts = entry | split: "|" %}
+        {% assign label = parts[0] %}
+        {% assign path = parts[1] %}
+        {% assign active = false %}
+        {% if page.url == path %}{% assign active = true %}{% endif %}
+        {% if path != "/" and page.url contains path %}{% assign active = true %}{% endif %}
+        <a href="{{ path | relative_url }}" class="{% if active %}active{% endif %}" {% if active %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+  </div>
 </header>

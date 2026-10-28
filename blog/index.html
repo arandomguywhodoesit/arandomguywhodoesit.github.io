@@ -1,0 +1,18 @@
+---
+layout: default
+title: Blog
+description: Cybersecurity learning notes and technical explainers.
+permalink: /blog/
+---
+<section class="page-intro"><p class="eyebrow">NOTES & EXPLAINERS</p><h1>Blog</h1><p>Concepts, investigations, and practical notes from my cybersecurity learning journey.</p></section>
+{% assign items = site.posts | where: "published", true | sort: "date" | reverse %}
+<section class="listing-section" data-listing>
+  <div class="listing-controls">
+    <label class="search-label"><span class="sr-only">Search blog posts</span><input type="search" placeholder="Search posts…" data-search></label>
+    <label class="filter-label"><span class="sr-only">Filter by tag</span><select data-tag-filter><option value="">All tags</option>{% assign tags = "" | split: "," %}{% for item in items %}{% for tag in item.tags %}{% assign normalized = tag | downcase %}{% unless tags contains normalized %}{% assign tags = tags | push: normalized %}{% endunless %}{% endfor %}{% endfor %}{% assign tags = tags | sort %}{% for tag in tags %}<option value="{{ tag | escape }}">{{ tag }}</option>{% endfor %}</select></label>
+    <label class="filter-label"><span class="sr-only">Sort blog posts</span><select data-sort><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A–Z</option></select></label>
+  </div>
+  <p class="results-count" data-results-count>{{ items.size }} posts</p>
+  <div class="card-grid" data-card-grid>{% for item in items %}{% include content-card.html item=item %}{% else %}<p class="empty-state">No published posts yet. Add a dated Markdown file to <code>_posts/</code>.</p>{% endfor %}</div>
+  <p class="empty-state" data-no-results hidden>No results match your search. Try another term or tag.</p>
+</section>

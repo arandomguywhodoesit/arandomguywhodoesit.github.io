@@ -1,0 +1,7 @@
+<article class="content-card" data-title="{{ include.item.title | downcase | escape }}" data-description="{{ include.item.description | default: '' | downcase | escape }}" data-date="{{ include.item.date | date: '%Y-%m-%d' }}" data-tags="{% for tag in include.item.tags %}{{ tag | downcase | escape }}{% unless forloop.last %},{% endunless %}{% endfor %}">
+  <div class="card-topline"><span class="content-type">{% if include.item.collection == 'labs' %}LAB{% elsif include.item.collection == 'projects' %}PROJECT{% else %}BLOG{% endif %}</span><time datetime="{{ include.item.date | date_to_xmlschema }}">{{ include.item.date | date: "%b %-d, %Y" }}</time></div>
+  <h3><a href="{{ include.item.url | relative_url }}">{{ include.item.title | escape }}</a></h3>
+  <p class="card-description">{{ include.item.description | default: "A technical write-up and learning record." | escape }}</p>
+  {% if include.item.tags %}<div class="tag-list">{% for tag in include.item.tags limit:4 %}<span class="tag">{{ tag }}</span>{% endfor %}</div>{% endif %}
+  <a class="card-link" href="{{ include.item.url | relative_url }}">Read more <span aria-hidden="true">→</span></a>
+</article>

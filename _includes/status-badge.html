@@ -1,8 +1,0 @@
-{%- comment -%}
-  Optional status badge, e.g. "completed" or "in-progress".
-  Usage: {% include status-badge.html status=page.status %}
-{%- endcomment -%}
-{%- if include.status and include.status != '' -%}
-{%- assign status_slug = include.status | slugify -%}
-<span class="badge badge-status badge-{{ status_slug }}">{{ include.status | replace: '-', ' ' | capitalize }}</span>
-{%- endif -%}
