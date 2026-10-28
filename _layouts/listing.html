@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<div class="listing-layout">
+  <aside class="left-sidebar">
+    <p class="eyebrow">EXPLORE</p>
+    <nav class="side-nav" aria-label="Content categories">
+      <a href="{{ '/labs/' | relative_url }}" {% if page.url == '/labs/' %}aria-current="page"{% endif %}><span>Labs</span><span class="side-count">{{ site.labs.size }}</span></a>
+      <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}><span>Projects</span><span class="side-count">{{ site.projects.size }}</span></a>
+      <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}><span>Blog</span><span class="side-count">{{ site.posts.size }}</span></a>
+    </nav>
+    <div class="sidebar-note"><span class="status-dot"></span> Always learning</div>
+  </aside>
+  <section class="listing-main">
+    <div class="page-intro">
+      <p class="eyebrow">{{ page.kicker | default: "THE KNOWLEDGE BASE" }}</p>
+      <h1>{{ page.heading | default: page.title }}</h1>
+      <p>{{ page.description | default: site.description }}</p>
+    </div>
+    <div class="listing-tools">
+      <label class="search-box" for="content-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="content-search" type="search" placeholder="Search by title, summary, or tag…" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <span class="result-count" id="result-count" aria-live="polite"></span>
+    </div>
+    {% assign source = page.collection_name %}
+    {% if source == "labs" %}{% assign entries = site.labs | sort: "date" | reverse %}
+    {% elsif source == "projects" %}{% assign entries = site.projects | sort: "date" | reverse %}
+    {% else %}{% assign entries = site.posts | sort: "date" | reverse %}{% endif %}
+    <div class="card-grid listing-grid" id="content-grid">
+      {% for item in entries %}
+        {% include content-card.html item=item kind=page.item_kind %}
+      {% endfor %}
+    </div>
+    <p class="no-results" id="no-results" hidden>No matching entries. Try a different search term.</p>
+  </section>
+</div>

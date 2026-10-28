@@ -1,11 +1,10 @@
-title: "Arrashi Faris Saesarian Libinuko | Cybersecurity Portfolio"
+title: "Arrashi Faris Saesarian Libinuko"
 description: "Cybersecurity labs, technical projects, and learning notes."
 url: ""
 baseurl: ""
 markdown: kramdown
 highlighter: rouge
 permalink: /blog/:year/:month/:day/:title/
-timezone: Asia/Singapore
 
 collections:
   labs:
@@ -18,37 +17,28 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: labs
+      type: "labs"
     values:
       layout: article
       content_type: Lab
   - scope:
       path: ""
-      type: projects
+      type: "projects"
     values:
       layout: article
       content_type: Project
   - scope:
       path: ""
-      type: posts
+      type: "posts"
     values:
       layout: article
       content_type: Blog
 
-# Replace these placeholders with your actual profile URLs.
-github_username: "YOUR_GITHUB_USERNAME"
-linkedin_url: "https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE/"
-author: "Arrashi Faris Saesarian Libinuko"
-
 plugins:
   - jekyll-feed
-  - jekyll-seo-tag
 
 exclude:
   - README.md
-  - LAB_TEMPLATE.md
-  - PROJECT_TEMPLATE.md
-  - BLOG_TEMPLATE.md
   - Gemfile
   - Gemfile.lock
   - vendor

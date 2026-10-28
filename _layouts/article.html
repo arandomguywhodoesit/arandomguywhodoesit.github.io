@@ -1,36 +1,38 @@
 ---
 layout: default
 ---
-<article class="article-shell">
-  <header class="article-header">
-    <a class="back-link" href="{% if page.content_type == 'Lab' %}{{ '/labs/' | relative_url }}{% elsif page.content_type == 'Project' %}{{ '/projects/' | relative_url }}{% else %}{{ '/blog/' | relative_url }}{% endif %}">← Back to {{ page.content_type | default: "articles" | downcase }}{% if page.content_type == 'Blog' %}s{% endif %}</a>
-    <p class="eyebrow">{{ page.content_type | default: "Article" }}{% if page.difficulty %} · {{ page.difficulty }}{% endif %}</p>
-    <h1>{{ page.title | escape }}</h1>
-    {% if page.description %}<p class="article-description">{{ page.description | escape }}</p>{% endif %}
-    <div class="article-meta">
-      {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}
-      {% if page.last_updated %}<span>Updated {{ page.last_updated | date: "%b %-d, %Y" }}</span>{% endif %}
+<div class="article-layout">
+  <article class="article">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a><span aria-hidden="true">/</span>
+      {% if page.collection == "labs" %}<a href="{{ '/labs/' | relative_url }}">Labs</a>
+      {% elsif page.collection == "projects" %}<a href="{{ '/projects/' | relative_url }}">Projects</a>
+      {% else %}<a href="{{ '/blog/' | relative_url }}">Blog</a>{% endif %}
+      <span aria-hidden="true">/</span><span aria-current="page">{{ page.title | escape }}</span>
+    </nav>
+    <header class="article-header">
+      <p class="eyebrow">{{ page.content_type | default: "Article" }}{% if page.category %} / {{ page.category }}{% endif %}</p>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.description %}<p class="article-deck">{{ page.description }}</p>{% endif %}
+      <div class="article-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+        {% assign words = content | number_of_words %}
+        <span>{{ words | divided_by: 200 | plus: 1 }} min read</span>
+      </div>
+      {% if page.tags and page.tags.size > 0 %}
+        <div class="tag-list" aria-label="Tags">{% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+      {% endif %}
+    </header>
+    <div class="article-body" id="article-body">
+      {{ content }}
     </div>
-    {% if page.tags %}<div class="tag-list">{% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>{% endif %}
-  </header>
-  <div class="article-layout">
-    <aside class="toc-panel" aria-label="Table of contents"><p class="toc-title">On this page</p><nav id="table-of-contents"><p class="muted">Headings will appear here.</p></nav></aside>
-    <div class="prose" id="article-content">{{ content }}</div>
-  </div>
-  {% assign related_labs = site.labs | where: "published", true %}
-  {% assign related_projects = site.projects | where: "published", true %}
-  {% assign related_posts = site.posts | where: "published", true %}
-  {% assign related_items = related_labs | concat: related_projects | concat: related_posts | sort: "date" | reverse %}
-  {% assign related_count = 0 %}
-  <section class="related-section">
-    <h2>More to explore</h2>
-    <div class="card-grid">
-      {% for item in related_items %}
-        {% if item.url != page.url and related_count < 3 %}
-          {% include content-card.html item=item %}
-          {% assign related_count = related_count | plus: 1 %}
-        {% endif %}
-      {% endfor %}
+    <div class="article-end"><span class="status-dot"></span> End of entry</div>
+  </article>
+  <aside class="toc-sidebar" aria-label="Article contents">
+    <div class="toc-inner">
+      <p class="eyebrow">ON THIS PAGE</p>
+      <nav id="table-of-contents"><p class="toc-placeholder">Headings will appear here.</p></nav>
+      <a class="back-to-top" href="#main-content">↑ Back to top</a>
     </div>
-  </section>
-</article>
+  </aside>
+</div>

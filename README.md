@@ -1,92 +1,135 @@
-# Cybersecurity Portfolio
+# Cybersecurity Portfolio — Jekyll + GitHub Pages
 
-A responsive portfolio built with Jekyll, Markdown, HTML, CSS, and JavaScript for GitHub Pages.
+A responsive dark-green cybersecurity blog and portfolio built with Jekyll, Liquid, Markdown, CSS, and vanilla JavaScript.
 
-## 1. Set up and deploy
+## Features
 
-1. Create a GitHub repository. For a user site, name it `YOUR_GITHUB_USERNAME.github.io`; for a project site, use any repository name.
-2. Upload this project's files to the repository root.
-3. Edit `_config.yml`:
-   - For a user site, set `url` to `https://YOUR_GITHUB_USERNAME.github.io` and leave `baseurl` empty.
-   - For a project site, set `url` to `https://YOUR_GITHUB_USERNAME.github.io` and `baseurl` to `/YOUR_REPOSITORY_NAME`.
-   - Replace `YOUR_GITHUB_USERNAME` and the LinkedIn placeholder with your real profile details. The footer intentionally hides unconfigured links.
-4. In GitHub, open **Settings → Pages** and choose **Deploy from a branch**, then select the branch (usually `main`) and `/(root)`.
-5. Save and wait for GitHub Pages to build the site. Review the Actions tab if deployment fails.
+- Home page with About Me, three recent projects, and three recent labs
+- Separate Labs, Projects, and Blog listing pages
+- Reusable Markdown-driven article layout
+- Breadcrumbs on individual articles
+- Right-side sticky table of contents generated from `h2` and `h3` headings
+- Instant listing search across titles, summaries, and tags
+- Dark/light theme toggle (preference is stored locally in the browser)
+- Tags, publication dates, and estimated reading time
+- Responsive mobile navigation and accessible focus styles
 
-GitHub Pages builds Jekyll sites automatically. The `github-pages` gem is included for optional local testing.
+## Repository structure
 
-### Local preview (optional)
+```text
+.
+├── _config.yml
+├── _layouts/
+│   ├── default.html
+│   ├── listing.html
+│   └── article.html
+├── _includes/
+│   └── content-card.html
+├── _labs/
+├── _projects/
+├── _posts/
+├── assets/
+│   ├── css/style.css
+│   ├── js/main.js
+│   └── favicon.svg
+├── index.html
+├── labs.html
+├── projects.html
+├── blog.html
+└── Gemfile
+```
 
-Install Ruby and Bundler, then run:
+## Publish with GitHub Pages
+
+1. Create a GitHub repository. For a user site, name it `YOUR-USERNAME.github.io`. A project site can use any repository name.
+2. Upload or push the contents of this folder to the repository's default branch (commonly `main`).
+3. Open **Settings → Pages** in the repository.
+4. Under **Build and deployment**, choose **Deploy from a branch**.
+5. Select branch `main` and folder `/ (root)`, then save.
+6. Wait for the GitHub Pages deployment to finish. The published URL will appear in Settings → Pages.
+
+### Configure the base URL for a project site
+
+For a user site at `https://YOUR-USERNAME.github.io`, keep `baseurl: ""`.
+
+For a project site at `https://YOUR-USERNAME.github.io/REPOSITORY`, set `_config.yml` like this:
+
+```yaml
+url: "https://YOUR-USERNAME.github.io"
+baseurl: "/REPOSITORY"
+```
+
+The templates use Jekyll's `relative_url` filter so internal links and assets work with a project-site base URL.
+
+## Optional local preview
+
+Install a Ruby version supported by GitHub Pages, then run:
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-Open the local address printed by Jekyll. If you change `baseurl` for local preview, remember to restore the intended production value before deployment.
+Open the local URL printed by Jekyll (usually `http://127.0.0.1:4000`).
 
-## 2. Add a new lab
+GitHub Pages builds the site in its own environment. You do not need to commit the generated `_site/` folder.
 
-1. Copy `LAB_TEMPLATE.md`.
-2. Save the copy in `_labs/` with a descriptive filename, e.g. `_labs/dns-investigation.md`.
-3. Fill in the YAML front matter and sections.
-4. Set `published: true` when ready. Keep it `false` while drafting.
-5. Commit and push. The page URL will be `/labs/dns-investigation/` and it will appear automatically in the Labs listing and recent-labs section.
+## Add a lab
 
-## 3. Add a new project
+Create a Markdown file under `_labs/`, for example `_labs/dns-investigation.md`:
 
-1. Copy `PROJECT_TEMPLATE.md` into `_projects/`, e.g. `_projects/python-log-analyzer.md`.
-2. Complete the front matter and project documentation.
-3. Set `published: true` only when ready.
-4. Commit and push. The page will be available at `/projects/python-log-analyzer/`.
-
-## 4. Publish a blog post
-
-1. Copy `BLOG_TEMPLATE.md`.
-2. Save it under `_posts/` using Jekyll's required filename format: `YYYY-MM-DD-title-with-hyphens.md`.
-3. Set the `date` to the intended publication date and `published: true`.
-4. Commit and push. The post appears on the Blog listing.
-
-## 5. Add images and screenshots
-
-1. Put image files in `assets/images/`, using descriptive names such as `tcp-handshake.png`.
-2. Reference them in Markdown using a baseurl-safe path:
-
-   ```markdown
-   ![TCP handshake capture]({{ '/assets/images/tcp-handshake.png' | relative_url }})
-   ```
-
-   If your Markdown processor does not evaluate Liquid inside Markdown on your chosen setup, use a root-relative path adjusted for your configured base URL or configure the image URL in the page front matter. Test the rendered image on the deployed site.
-3. Add meaningful alt text. Crop or redact tokens, email addresses, usernames, public IPs where sensitive, and other identifying information before publishing.
-
-## 6. Customize the website
-
-- **Colors, typography, layout:** edit `assets/css/style.css`.
-- **Mobile navigation, search, sorting, tag filters, table of contents:** edit `assets/js/main.js`.
-- **Profile links and site settings:** edit `_config.yml`.
-- **Navigation and footer:** edit `_includes/navbar.html` and `_includes/footer.html`.
-- **Page layouts:** edit `_layouts/default.html` and `_layouts/article.html`.
-- **Home content:** edit `index.html`.
-
-## Front matter reference
-
-```yaml
+```markdown
 ---
-title: "Your article title"
-description: "A short summary shown on cards and search."
-date: 2026-10-28
-last_updated:
-tags: [networking, security]
-published: false
+title: "DNS Investigation with Wireshark"
+date: 2026-11-01
+description: "Inspect DNS queries and responses in a packet capture."
+tags: [Networking, DNS, Wireshark]
+category: Network Analysis
 ---
+
+## Objective
+
+State what you are trying to learn.
+
+## Environment
+
+List your tools and setup.
+
+## Procedure
+
+Describe reproducible steps.
+
+## Evidence
+
+Add screenshots, command output, or packet details.
+
+## Findings
+
+Explain what the evidence supports.
+
+## What I learned
+
+Record lessons and follow-up questions.
 ```
 
-Use `published: false` for drafts. The homepage and listing pages explicitly filter for `published: true`. Blog filenames must include the date prefix. Dates are displayed using the configured Singapore timezone.
+Commit the file. Jekyll generates its article page and adds it to the Labs listing and recent-labs section automatically.
 
-## Notes
+## Add a project
 
-- Example lab, project, and blog content is marked as example material. Replace it with your own work and evidence.
-- Never publish credentials, API keys, tokens, private company information, or unredacted sensitive screenshots.
-- GitHub Pages supports a limited set of plugins. This implementation uses GitHub Pages-compatible plugins and client-side JavaScript rather than requiring a custom server.
-- The article table of contents is generated in the browser from each page's `h2` and `h3` headings.
+Create a Markdown file under `_projects/` using the same front matter structure. Jekyll automatically publishes it to the Projects listing and homepage cards.
+
+## Add a blog post
+
+Create a file in `_posts/` with this filename format:
+
+`YYYY-MM-DD-your-post-title.md`
+
+Add `title`, `date`, `description`, and `tags` in YAML front matter. Posts are automatically listed under Blog.
+
+## Writing notes
+
+- Use `##` and `###` headings; they are added to the article's table of contents.
+- Put screenshots in a folder such as `assets/images/` and reference them with `![Description]({{ '/assets/images/example.png' | relative_url }})` in a Liquid-enabled page, or use a root-relative path appropriate to your deployment.
+- Do not include secrets, credentials, private customer data, or sensitive information in public lab notes.
+- The listing search filters loaded cards; it does not search inside the full body of every article.
+- The reading-time display is an estimate based on the rendered article word count.
