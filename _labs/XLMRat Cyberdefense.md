@@ -104,3 +104,12 @@ The script first drops `Conted.vbs`.
 It then runs `Contend.bat`, which in turn runs `Contend.ps1`.
 
 ![](https://chocolate-track-8f8.notion.site/image/attachment%3A5b4c0559-5b44-4848-8591-ff758d261b3e%3Aimage.png?table=block&id=404c20b2-db8d-80c2-a8b4-c15a2bd27475&spaceId=6b4c20b2-db8d-8188-975b-00039462c080&width=1020&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl)
+
+## Conculsion
+By analysing the PCAP file, I've identified suspicious network activity with multi-stage malware infection. My investigation revealed a HTTP request to http://45.126.209.4:222/mdm.jpg, which contained an obfuscated Powershell Command.
+
+Further anlaysis of the script revealed a .NET assembly used as a loader and a secondary executable, which was identified as AsyncRAT based on Alibaba's VirusTotal. The script also leveraged RegSvs.exe, a legitimate Windows utility to execute the payload and was designed to drop the files Conted.vbs, Conted.bat and Conted.ps1.
+
+The findings higlights the importance of:
+1. Network monitoring: Implementing firewall to block unusual network traffic such as an outbound HTTP request using port 222.
+2. Priveleges: Applying least-privelege to application and restrict unecessary administrative priveleges.
