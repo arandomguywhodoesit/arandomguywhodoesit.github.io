@@ -14,6 +14,13 @@ layout: default
       <p class="eyebrow">{{ page.content_type | default: "Article" }}{% if page.category %} / {{ page.category }}{% endif %}</p>
       <h1>{{ page.title | escape }}</h1>
       {% if page.description %}<p class="article-deck">{{ page.description }}</p>{% endif %}
+      {% if lablink.link %}
+  <p class="article-link">
+    <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">
+      Link to the lab: {{lablink.link}}
+    </a>
+  </p>
+{% endif %}
       <div class="article-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
         {% assign words = content | number_of_words %}
