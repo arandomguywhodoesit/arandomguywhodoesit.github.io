@@ -2,7 +2,7 @@
 title: "XLMRat Cyberdefense"
 source: "https://chocolate-track-8f8.notion.site/XLMRat-Cyberdefense-403c20b2db8d808b954ef90e5c540784"
 date: 2026-10-29
-description: "Cyberdefense Lab - XLMRat"
+description: "Cyberdefense Lab - XLMRat. Link to the lab: https://cyberdefenders.org/blueteam-ctf-challenges/xlmrat/"
 tags: [Analysis, Wireshark, TCP]
 category: Network Analysis
 ---
