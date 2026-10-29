@@ -19,7 +19,7 @@ A compromised machine was flagged for suspicious network traffic. This analysis 
 - VirusTotal - OSINT to classify malware
 
 
-### Questions
+## Questions
 
 ## 1. The attacker successfully executed a command to download the first stage of the malware. What is the URL from which the first malware stage was installed?
 
