@@ -15,12 +15,7 @@ layout: default
       <h1>{{ page.title | escape }}</h1>
       {% if page.description %}<p class="article-deck">{{ page.description }}</p>{% endif %}
       {% if page.lablink %}
-  <p class="article-link">
-    <a href="{{ page.lablink }}" target="_blank" rel="noopener noreferrer">
-      Link to the lab: {{page.lablink}}
-    </a>
-  </p>
-{% endif %}
+      <p class="article-link">Link to the lab: <a href="{{ page.lablink }}" target="_blank" rel="noopener noreferrer">{{page.lablink}}</a></p>{% endif %}
       <div class="article-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
         {% assign words = content | number_of_words %}
