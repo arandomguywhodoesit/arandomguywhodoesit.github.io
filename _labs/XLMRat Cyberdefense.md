@@ -7,20 +7,19 @@ tags: [Networking, Wireshark, TCP]
 category: Network Analysis
 ---
 
-# XLMRat Cyberdefense
-
-## **Lab Scenario**
+## Lab Scenario
 
 A compromised machine was flagged for suspicious network traffic. This analysis examines the PCAP to identify the apparent attack method and payloads, and to reconstruct the sequence of events. It focuses on the suspected initial access, the techniques observed, and the malware’s activity after compromise.
 
-# Tools
+## Tools
 
 - Wireshark — to analyze the packet capture (PCAP) file
 - CyberChef - To convert hexadecimal to SHA
 - hostingchecker.com - To check for host
 - VirusTotal - OSINT to classify malware
 
-# Questions
+
+### Questions
 
 ## 1. The attacker successfully executed a command to download the first stage of the malware. What is the URL from which the first malware stage was installed?
 
