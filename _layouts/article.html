@@ -14,10 +14,10 @@ layout: default
       <p class="eyebrow">{{ page.content_type | default: "Article" }}{% if page.category %} / {{ page.category }}{% endif %}</p>
       <h1>{{ page.title | escape }}</h1>
       {% if page.description %}<p class="article-deck">{{ page.description }}</p>{% endif %}
-      {% if lablink.link %}
+      {% if page.lablink %}
   <p class="article-link">
-    <a href="{{ lablink.link }}" target="_blank" rel="noopener noreferrer">
-      Link to the lab: {{lablink.link}}
+    <a href="{{ page.lablink }}" target="_blank" rel="noopener noreferrer">
+      Link to the lab: {{page.lablink}}
     </a>
   </p>
 {% endif %}
